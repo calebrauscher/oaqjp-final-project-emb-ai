@@ -33,6 +33,15 @@ class TestEmotionDetector(unittest.TestCase):
         self.assertIn("fear", result)
         self.assertGreater(result["fear"], 0.5)
     
-
+    def test_empty_text(self):
+        results = {
+            "joy": 0.983,
+            "sadness": 0.002,
+            "anger": 0.001,
+            "disgust": 0.001,
+            "fear": 0.013,
+            "dominant_emotion": None
+            }
+        self.assertEqual(results["dominant_emotion"], None)
 if __name__ == '__main__':
     unittest.main()

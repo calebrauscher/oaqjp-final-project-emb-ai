@@ -10,12 +10,12 @@ def index():
 @app.route("/emotionDetector", methods=["GET"])
 def emotion_detection_api():
     text_to_analyze = request.args.get("textToAnalyze", "")
-    if not text_to_analyze.strip():
-        return "Please provide valid text for emotion detection."
-    
+        
     try:
         emotion_scores = emotion_detector(text_to_analyze)
-
+        if emotion_scores.get("dominant_emotion") is None:
+            return "Invalid text! Please try again!"
+        
         # Format the emotion results as in the required output
         formatted_scores = ", ".join(
             [f"'{emotion}': {score}" for emotion, score in emotion_scores.items() if emotion != "dominant_emotion"]
